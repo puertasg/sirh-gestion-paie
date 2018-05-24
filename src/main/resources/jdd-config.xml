@@ -39,6 +39,11 @@
 		</property>
 	</bean>
 	
+	<bean id="grade1" class="dev.paie.entite.Grade">
+		<property name="nbHeuresBase" value="151.67"></property>
+		<property name="tauxBase" value="11.0984"></property>
+	</bean>
+	
 	<bean id="remuneration1" class="dev.paie.entite.RemunerationEmploye">
 		<property name="matricule" value="M01"></property>
 		<property name="entreprise">
@@ -46,6 +51,9 @@
 		</property>
 		<property name="profilRemuneration">
 			<ref bean="cotisations"></ref>
+		</property>
+		<property name="grade">
+			<ref bean="grade1"/>
 		</property>
 	</bean>
 	
