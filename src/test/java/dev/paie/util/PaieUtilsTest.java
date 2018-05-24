@@ -33,13 +33,12 @@ public class PaieUtilsTest {
 		String resultat = paieUtils.formaterBigDecimal(new BigDecimal("2.199"));
 		assertThat(resultat, equalTo("2.20"));
 	}
-	
+
 	@Test
-	public void test_addition_BigDecimal()
-	{
+	public void test_addition_BigDecimal() {
 		BigDecimal big1 = new BigDecimal("2.22");
 		BigDecimal big2 = new BigDecimal("4.76");
-		
+
 		String resultat = paieUtils.formaterBigDecimal(big1.add(big2));
 		assertThat(resultat, equalTo("6.98"));
 	}
