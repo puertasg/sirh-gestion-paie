@@ -3,8 +3,17 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 	
+	<bean id="entreprise1" class="dev.paie.entite.Entreprise">
+		<property name="siret" value="80966785000022"></property>
+		<property name="denomination" value="denomination"></property>
+		<property name="codeNaf" value="6202A"></property>
+	</bean>
+	
 	<bean id="remuneration1" class="dev.paie.entite.RemunerationEmploye">
 		<property name="matricule" value="M01"></property>
+		<property name="entreprise">
+			<ref bean="entreprise1"/>
+		</property>
 	</bean>
 	
 	<bean id="bulletin1" class="dev.paie.entite.BulletinSalaire">

@@ -39,7 +39,7 @@ public class JeuxDeDonneesTest {
 	@Test
 	public void test_entreprise() {
 		assertThat(bulletin1.getRemunerationEmploye().getEntreprise().getSiret(), equalTo("80966785000022"));
-		assertThat(bulletin1.getRemunerationEmploye().getEntreprise().getDenomination(), equalTo("Dev Entreprise"));
+		assertThat(bulletin1.getRemunerationEmploye().getEntreprise().getDenomination(), equalTo("denomination"));
 		assertThat(bulletin1.getRemunerationEmploye().getEntreprise().getCodeNaf(), equalTo("6202A"));
 	}
 
