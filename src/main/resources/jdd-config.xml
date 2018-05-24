@@ -2,9 +2,16 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-
+	
+	<bean id="remuneration1" class="dev.paie.entite.RemunerationEmploye">
+		<property name="matricule" value="M01"></property>
+	</bean>
+	
 	<bean id="bulletin1" class="dev.paie.entite.BulletinSalaire">
 		<property name="primeExceptionnelle" value="1000"></property>
+		<property name="remunerationEmploye">
+			<ref bean="remuneration1"></ref>
+		</property>
 	</bean>
 
 	<!-- importer une configuration dans une autre -->
