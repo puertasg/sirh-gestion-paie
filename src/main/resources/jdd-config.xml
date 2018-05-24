@@ -11,7 +11,7 @@
 		<property name="codeNaf" value="6202A"></property>
 	</bean>
 	
-	<bean id="cotisationNonImposable" class="dev.paie.entite.ProfilRemuneration">
+	<bean id="cotisations" class="dev.paie.entite.ProfilRemuneration">
 		<property name="cotisationsNonImposables">
 			<util:list value-type="dev.paie.entite.Cotisation">
 				<ref bean="ep01"/>
@@ -30,6 +30,13 @@
 				<ref bean="ep37"/>
 			</util:list>
 		</property>
+		
+		<property name="cotisationsImposables">
+			<util:list value-type="dev.paie.entite.Cotisation">
+				<ref bean="sp01"/>
+				<ref bean="sp02"/>
+			</util:list>
+		</property>
 	</bean>
 	
 	<bean id="remuneration1" class="dev.paie.entite.RemunerationEmploye">
@@ -38,7 +45,7 @@
 			<ref bean="entreprise1"/>
 		</property>
 		<property name="profilRemuneration">
-			<ref bean="cotisationNonImposable"></ref>
+			<ref bean="cotisations"></ref>
 		</property>
 	</bean>
 	
@@ -51,4 +58,5 @@
 
 	<!-- importer une configuration dans une autre -->
 	<import resource="classpath:cotisations-non-imposables.xml" />
+	<import resource="classpath:cotisations-imposables.xml" />
 </beans>
