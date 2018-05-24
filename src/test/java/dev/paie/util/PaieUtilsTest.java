@@ -8,13 +8,16 @@ import java.math.BigDecimal;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class PaieUtilsTest {
 	private PaieUtils paieUtils;
+	private ClassPathXmlApplicationContext context;
 
 	@Before
 	public void onSetup() {
-		// code exécuté avant chaque test
+		context = new ClassPathXmlApplicationContext("app-config.xml");
+		paieUtils = context.getBean(PaieUtils.class);
 	}
 
 	@Test
@@ -33,6 +36,6 @@ public class PaieUtilsTest {
 
 	@After
 	public void onExit() {
-		// code exécuté après chaque test
+		context.close();
 	}
 }
