@@ -59,7 +59,13 @@ public class Cotisation {
 		this.id = id;
 	}
 	
-	
+	public boolean equals(Cotisation cotisation)
+	{
+		return this.code.equals(cotisation.getCode())
+				&& this.libelle.equals(cotisation.getLibelle())
+				&& this.tauxSalarial.compareTo(cotisation.getTauxSalarial()) == 0
+				&& this.tauxPatronal.compareTo(cotisation.getTauxPatronal()) == 0;
+	}
 	
 	
 
