@@ -23,61 +23,51 @@ import dev.paie.entite.Grade;
 @ContextConfiguration(classes = { DataSourceMySQLConfig.class })
 @RunWith(SpringRunner.class)
 public class GradeServiceJdbcTemplateTest {
-	
+
 	@Autowired
 	private GradeService gradeService;
-	
+
 	@Autowired
 	@Qualifier("grade1")
 	private Grade grade;
-	
+
 	@Autowired
 	@Qualifier("grade2")
 	private Grade nouveauGrade;
-	
+
 	@Test
-	public void test_sauvegarder_liste_mettre_a_jour()
-	{
-		
+	public void test_sauvegarder_liste_mettre_a_jour() {
+
 		// TODO sauvegarder un nouveau grade
-		try
-		{
+		try {
 			gradeService.sauvegarder(grade);
-		}
-		catch(DataAccessException ex)
-		{
+		} catch (DataAccessException ex) {
+			System.out.println(ex);
 			fail();
 		}
 
-        // TODO vérifier qu'il est possible de récupérer le nouveau grade via la méthode lister
-		try
-		{
+		// TODO vérifier qu'il est possible de récupérer le nouveau grade via la
+		// méthode lister
+		try {
 			List<Grade> listeGrade = gradeService.lister();
 			assertThat(listeGrade.contains(grade));
-		}
-		catch(DataAccessException ex)
-		{
-			fail();
-		}
-		
-        // TODO modifier un grade
-		try
-		{
-			gradeService.mettreAJour(nouveauGrade);
-		}
-		catch(DataAccessException ex)
-		{
+		} catch (DataAccessException ex) {
 			fail();
 		}
 
-        // TODO vérifier que les modifications sont bien prises en compte via la méthode lister
-		try
-		{
+		// TODO modifier un grade
+		try {
+			gradeService.mettreAJour(nouveauGrade);
+		} catch (DataAccessException ex) {
+			fail();
+		}
+
+		// TODO vérifier que les modifications sont bien prises en compte via la
+		// méthode lister
+		try {
 			List<Grade> listeGradeUpdate = gradeService.lister();
 			assertThat(listeGradeUpdate.contains(nouveauGrade));
-		}
-		catch(DataAccessException ex)
-		{
+		} catch (DataAccessException ex) {
 			fail();
 		}
 	}
