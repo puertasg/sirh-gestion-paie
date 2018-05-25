@@ -1,6 +1,5 @@
 package dev.paie.util;
 
-import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertTrue;
 import static org.assertj.core.api.Assertions.*;
 
