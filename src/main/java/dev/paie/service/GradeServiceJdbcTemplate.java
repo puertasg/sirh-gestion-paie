@@ -29,8 +29,8 @@ public class GradeServiceJdbcTemplate implements GradeService{
 
 	@Override
 	public void mettreAJour(Grade grade) {
-		// TODO Auto-generated method stub
-		
+		String sqlUpdate = "UPDATE grade SET CODE = ?, NB_HEURES_BASE = ?, TAUX_BASE = ? WHERE id = ?";
+		jdbcTemplate.update(sqlUpdate, grade.getCode(), grade.getNbHeuresBase(), grade.getTauxBase(), grade.getId());
 	}
 
 	@Override
