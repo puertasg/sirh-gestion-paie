@@ -15,13 +15,13 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import dev.paie.config.DataSourceMySQLConfig;
 import dev.paie.config.H2Config;
+import dev.paie.config.JddConfig;
 import dev.paie.entite.Grade;
 
 @Configuration
 @ImportResource("classpath:jdd-config.xml")
-@ContextConfiguration(classes = { DataSourceMySQLConfig.class, H2Config.class })
+@ContextConfiguration(classes = { GradeServiceJdbcTemplate.class, H2Config.class, JddConfig.class })
 @RunWith(SpringRunner.class)
 public class GradeServiceJdbcTemplateTest {
 
