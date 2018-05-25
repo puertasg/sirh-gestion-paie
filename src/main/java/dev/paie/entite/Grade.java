@@ -42,7 +42,7 @@ public class Grade {
 	}
 
 	public boolean equals(Grade g) {
-		if (this.id == g.getId() && this.code == g.getCode() && this.nbHeuresBase == g.getNbHeuresBase()
+		if (this.code == g.getCode() && this.nbHeuresBase == g.getNbHeuresBase()
 				&& this.tauxBase == g.getTauxBase()) {
 			return true;
 		} else {

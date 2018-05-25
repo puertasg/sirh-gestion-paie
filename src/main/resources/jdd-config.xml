@@ -39,8 +39,17 @@
 	</bean>
 
 	<bean id="grade1" class="dev.paie.entite.Grade">
+		<property name="id" value="123"></property>
+		<property name="code" value="abc"></property>
 		<property name="nbHeuresBase" value="151.67"></property>
 		<property name="tauxBase" value="11.0984"></property>
+	</bean>
+	
+	<bean id="grade2" class="dev.paie.entite.Grade">
+		<property name="id" value="456"></property>
+		<property name="code" value="def"></property>
+		<property name="nbHeuresBase" value="152.67"></property>
+		<property name="tauxBase" value="12.0984"></property>
 	</bean>
 
 	<bean id="remuneration1" class="dev.paie.entite.RemunerationEmploye">

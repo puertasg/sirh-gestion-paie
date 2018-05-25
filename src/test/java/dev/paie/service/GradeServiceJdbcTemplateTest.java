@@ -1,37 +1,43 @@
 package dev.paie.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.fail;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.ImportResource;
 import org.springframework.dao.DataAccessException;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringRunner;
 
+import dev.paie.config.DataSourceMySQLConfig;
 import dev.paie.entite.Grade;
 
+@Configuration
+@ImportResource("classpath:jdd-config.xml")
+@ContextConfiguration(classes = { DataSourceMySQLConfig.class })
+@RunWith(SpringRunner.class)
 public class GradeServiceJdbcTemplateTest {
 	
 	@Autowired
 	private GradeService gradeService;
 	
+	@Autowired
+	@Qualifier("grade1")
+	private Grade grade;
+	
+	@Autowired
+	@Qualifier("grade2")
+	private Grade nouveauGrade;
+	
 	@Test
 	public void test_sauvegarder_liste_mettre_a_jour()
 	{
-		Grade grade = new Grade();
-		grade.setId(123);
-		grade.setCode("abc");
-		grade.setNbHeuresBase(new BigDecimal("123.456"));
-		grade.setNbHeuresBase(new BigDecimal("78.9"));
-		
-		Grade nouveauGrade = new Grade();
-		nouveauGrade.setId(123);
-		nouveauGrade.setCode("abc");
-		nouveauGrade.setNbHeuresBase(new BigDecimal("123.456"));
-		nouveauGrade.setNbHeuresBase(new BigDecimal("78.9"));
 		
 		// TODO sauvegarder un nouveau grade
 		try
