@@ -31,10 +31,6 @@ public class GradeServiceJdbcTemplateTest {
 	@Qualifier("grade1")
 	private Grade grade;
 
-	@Autowired
-	@Qualifier("grade2")
-	private Grade nouveauGrade;
-
 	@Test
 	public void test_sauvegarder_liste_mettre_a_jour() {
 
@@ -42,7 +38,6 @@ public class GradeServiceJdbcTemplateTest {
 		try {
 			gradeService.sauvegarder(grade);
 		} catch (DataAccessException ex) {
-			System.out.println(ex);
 			fail();
 		}
 
@@ -57,7 +52,8 @@ public class GradeServiceJdbcTemplateTest {
 
 		// TODO modifier un grade
 		try {
-			gradeService.mettreAJour(nouveauGrade);
+			grade.setCode("456");
+			gradeService.mettreAJour(grade);
 		} catch (DataAccessException ex) {
 			fail();
 		}
@@ -66,7 +62,7 @@ public class GradeServiceJdbcTemplateTest {
 		// méthode lister
 		try {
 			List<Grade> listeGradeUpdate = gradeService.lister();
-			assertThat(listeGradeUpdate.contains(nouveauGrade));
+			assertThat(listeGradeUpdate.contains(grade));
 		} catch (DataAccessException ex) {
 			fail();
 		}
