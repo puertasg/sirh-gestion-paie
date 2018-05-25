@@ -71,6 +71,13 @@
 			<ref bean="remuneration1"></ref>
 		</property>
 	</bean>
+	
+	<bean id="avantage1" class="dev.paie.entite.Avantage">
+		<property name="id" value="123"></property>
+		<property name="code" value="456"></property>
+		<property name="nom" value="un nom"></property>
+		<property name="montant" value="152.67"></property>
+	</bean>
 
 	<!-- importer une configuration dans une autre -->
 	<import resource="classpath:cotisations-non-imposables.xml" />
