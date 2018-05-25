@@ -42,7 +42,7 @@ public class GradeServiceJdbcTemplateTest {
 		// TODO sauvegarder un nouveau grade
 		try
 		{
-			gradeService.mettreAJour(grade);
+			gradeService.sauvegarder(grade);
 		}
 		catch(DataAccessException ex)
 		{
