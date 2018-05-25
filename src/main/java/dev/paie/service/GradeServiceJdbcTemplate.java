@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 import dev.paie.entite.Grade;
+import dev.paie.util.GradeMapper;
 
 @Service
 public class GradeServiceJdbcTemplate implements GradeService{
@@ -35,8 +36,9 @@ public class GradeServiceJdbcTemplate implements GradeService{
 
 	@Override
 	public List<Grade> lister() {
-		// TODO Auto-generated method stub
-		return null;
+		String sqlSelect = "SELECT * FROM grade";
+		List<Grade> listGrade = jdbcTemplate.query(sqlSelect, new GradeMapper());
+		return listGrade;
 	}
 	
 }
