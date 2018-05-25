@@ -6,22 +6,25 @@ import java.util.List;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import dev.paie.config.DataSourceMySQLConfig;
 import dev.paie.config.H2Config;
 import dev.paie.config.JpaConfig;
 import dev.paie.entite.Cotisation;
 
 @Configuration
-@ImportResource("jdd-config.xml")
-@ContextConfiguration(classes = {CotisationServiceJpa.class, JpaConfig.class, H2Config.class})
+@ImportResource("classpath:cotisations-imposables.xml")
+@ContextConfiguration(classes = {DataSourceMySQLConfig.class, JpaConfig.class, H2Config.class})
 @RunWith(SpringRunner.class)
 public class CotisationServiceJpaTest {
 	
 	@Autowired
+	@Qualifier("ep01")
 	private Cotisation cotisation;
 	
 	@Autowired
