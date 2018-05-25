@@ -2,12 +2,28 @@ package dev.paie.entite;
 
 import java.math.BigDecimal;
 
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 public class Cotisation {
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="id", unique = true, nullable = false)
 	private Integer id;
+	
+	@Column(name="CODE", nullable = false)
 	private String code;
+	
+	@Column(name="LIBELLE", nullable = false)
 	private String libelle;
+	
+	@Column(name="TAUX_SALARIAL", nullable = false)
 	private BigDecimal tauxSalarial;
+	
+	@Column(name="TAUX_PATRONAL", nullable = false)
 	private BigDecimal tauxPatronal;
 	
 	
