@@ -34,6 +34,16 @@ public class Grade {
 		this.id = id;
 	}
 	
-	
+	public boolean equals(Grade g)
+	{
+		if(this.id == g.getId() && this.code == g.getCode() && this.nbHeuresBase == g.getNbHeuresBase() && this.tauxBase == g.getTauxBase())
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
 
 }
