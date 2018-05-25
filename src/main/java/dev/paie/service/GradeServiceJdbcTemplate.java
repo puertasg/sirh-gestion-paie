@@ -23,8 +23,8 @@ public class GradeServiceJdbcTemplate implements GradeService{
 
 	@Override
 	public void sauvegarder(Grade nouveauGrade) {
-		// TODO Auto-generated method stub
-		
+		String sqlInsert = "INSERT INTO grade (id, CODE, NB_HEURES_BASE, TAUX_BASE) VALUES (?, ?, ?, ?)";
+		jdbcTemplate.update(sqlInsert, nouveauGrade.getId(), nouveauGrade.getCode(), nouveauGrade.getNbHeuresBase(), nouveauGrade.getTauxBase());
 	}
 
 	@Override
