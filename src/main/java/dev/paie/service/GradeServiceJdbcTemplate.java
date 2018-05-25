@@ -12,10 +12,10 @@ import dev.paie.entite.Grade;
 import dev.paie.util.GradeMapper;
 
 @Service
-public class GradeServiceJdbcTemplate implements GradeService{
-	
+public class GradeServiceJdbcTemplate implements GradeService {
+
 	private JdbcTemplate jdbcTemplate;
-	
+
 	@Autowired
 	public GradeServiceJdbcTemplate(DataSource dataSource) {
 		super();
@@ -25,7 +25,8 @@ public class GradeServiceJdbcTemplate implements GradeService{
 	@Override
 	public void sauvegarder(Grade nouveauGrade) {
 		String sqlInsert = "INSERT INTO grade (id, CODE, NB_HEURES_BASE, TAUX_BASE) VALUES (?, ?, ?, ?)";
-		jdbcTemplate.update(sqlInsert, nouveauGrade.getId(), nouveauGrade.getCode(), nouveauGrade.getNbHeuresBase(), nouveauGrade.getTauxBase());
+		jdbcTemplate.update(sqlInsert, nouveauGrade.getId(), nouveauGrade.getCode(), nouveauGrade.getNbHeuresBase(),
+				nouveauGrade.getTauxBase());
 	}
 
 	@Override
@@ -40,5 +41,5 @@ public class GradeServiceJdbcTemplate implements GradeService{
 		List<Grade> listGrade = jdbcTemplate.query(sqlSelect, new GradeMapper());
 		return listGrade;
 	}
-	
+
 }
