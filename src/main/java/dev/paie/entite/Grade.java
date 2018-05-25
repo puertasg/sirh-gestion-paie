@@ -42,12 +42,8 @@ public class Grade {
 	}
 
 	public boolean equals(Grade g) {
-		if (this.code == g.getCode() && this.nbHeuresBase == g.getNbHeuresBase()
-				&& this.tauxBase == g.getTauxBase()) {
-			return true;
-		} else {
-			return false;
-		}
+		//compareTo renvoie 0 si les deux BigDeicmal sont égaux
+		return this.code.equals(g.getCode()) && this.nbHeuresBase.compareTo(g.getNbHeuresBase())==0 && this.tauxBase.compareTo(g.getTauxBase())==0;
 	}
 
 }
