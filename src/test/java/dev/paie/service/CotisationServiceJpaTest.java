@@ -13,7 +13,7 @@ import dev.paie.config.JpaConfig;
 
 @Configuration
 @ImportResource("jdd-config.xml")
-@ContextConfiguration(classes = {JpaConfig.class, H2Config.class})
+@ContextConfiguration(classes = {CotisationServiceJpa.class, JpaConfig.class, H2Config.class})
 @RunWith(SpringRunner.class)
 public class CotisationServiceJpaTest {
 	
@@ -24,7 +24,7 @@ public class CotisationServiceJpaTest {
 	public void test_sauvegarder_lister_mettre_a_jour()
 	{
 		// TODO sauvegarder une nouvelle cotisation
-
+		
         // TODO vérifier qu'il est possible de récupérer la nouvelle cotisation via la méthode lister
 
         // TODO modifier une cotisation
