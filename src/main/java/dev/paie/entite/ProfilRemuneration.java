@@ -82,5 +82,9 @@ public class ProfilRemuneration {
 	public void setAvantages(List<Avantage> avantages) {
 		this.avantages = avantages;
 	}
-
+	
+	public String toString()
+	{
+		return this.code;
+	}
 }

@@ -19,7 +19,62 @@
 		<h1>Créer Employe</h1>
 		<p>Préfixe Matricule : ${prefixMatricule}</p>
 		
+		<form:form method="post" modelAttribute="remEmploye">
 		
+			<div class="form-group row">
+                <label for="inputMatricule" class="col-form-label col-4">Matricule</label>
+                <div class="col-8 pr-0">
+                    <form:input path="matricule" id="inputMatricule" class="form-control" />
+                    <div class="invalid-feedback">
+                        Le matricule est obligatoire.
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="inputEntreprise" class="col-form-label col-4">Entreprise</label>
+                <div class="col-8 pr-0">
+                    <form:select path="entreprise" id="inputEntreprise" class="form-control">
+                    	<form:options items="${listEntreprise}" itemValue="id"/>
+                    </form:select>
+                    <div class="invalid-feedback">
+                        L'entreprise est obligatoire.
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="inputProfilRemuneration" class="col-form-label col-4">Profil de rémunération</label>
+                <div class="col-8 pr-0">
+                    <form:select path="profilRemuneration" id="inputProfilRemuneration" class="form-control">
+                    	<form:options items="${listProfils}" itemValue="id"/>
+                    </form:select>
+                    <div class="invalid-feedback">
+                        Le profil de rémunération est obligatoire.
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="inputGrade" class="col-form-label col-4">Grade</label>
+                <div class="col-8 pr-0">
+                    <form:select path="grade" id="inputGrade" class="form-control">
+                    	<form:options items="${listGrades}" itemValue="id"/>
+                    </form:select>
+                    <div class="invalid-feedback">
+                        Le grade est obligatoire.
+                    </div>
+                </div>
+            </div>
+            
+            <form:hidden path="${_csrf.parameterName}" value="${_csrf.token}"/>
+
+            <div class="row">
+                <div class="ml-auto">
+                    <input type="submit" id="buttonCreer" class="btn btn-sm btn-success">Créer</button>
+                </div>
+            </div>
+		</form:form>
 	</div>
 	
 	<!-- Optional JavaScript -->

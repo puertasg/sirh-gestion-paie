@@ -61,5 +61,11 @@ public class Grade {
 		//compareTo renvoie 0 si les deux BigDeicmal sont égaux
 		return this.code.equals(g.getCode()) && this.nbHeuresBase.compareTo(g.getNbHeuresBase())==0 && this.tauxBase.compareTo(g.getTauxBase())==0;
 	}
+	
+	public String toString()
+	{
+		String codeFormat = this.code.replace("_", " ");
+		return codeFormat + " - " + 1 + " € / an";
+	}
 
 }
