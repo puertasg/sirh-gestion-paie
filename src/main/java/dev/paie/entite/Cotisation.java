@@ -22,10 +22,10 @@ public class Cotisation {
 	@Column(name="LIBELLE", nullable = false)
 	private String libelle;
 	
-	@Column(name="TAUX_SALARIAL", nullable = false)
+	@Column(name="TAUX_SALARIAL", nullable = true)
 	private BigDecimal tauxSalarial;
 	
-	@Column(name="TAUX_PATRONAL", nullable = false)
+	@Column(name="TAUX_PATRONAL", nullable = true)
 	private BigDecimal tauxPatronal;
 	
 	
