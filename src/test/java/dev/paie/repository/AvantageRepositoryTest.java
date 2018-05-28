@@ -25,8 +25,6 @@ public class AvantageRepositoryTest {
 
 	@Test
 	public void test_sauvegarder_lister_mettre_a_jour() {
-		System.out.println(avantage.getId());
-		
 		// TODO sauvegarder un nouvel avantage
 		avantageRepository.save(avantage);
 
