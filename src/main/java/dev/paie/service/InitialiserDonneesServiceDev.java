@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import dev.paie.entite.Cotisation;
+import dev.paie.entite.Entreprise;
 
 @Service
 @Transactional
@@ -20,12 +21,17 @@ public class InitialiserDonneesServiceDev implements InitialiserDonneesService{
 	@Override
 	public void initialiser() {
 		
-		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("cotisations-imposables.xml");
-		Collection<Cotisation> mapCotisations = context.getBeansOfType(Cotisation.class).values();
-		for(Cotisation cotisation : mapCotisations)
+		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("cotisations-imposables.xml", "cotisations-non-imposables.xml", "entreprises.xml", "grades.xml", "profils-remuneration.xml");
+		Collection<Cotisation> collecCotisations = context.getBeansOfType(Cotisation.class).values();
+		Collection<Entreprise> collecEntreprises = context.getBeansOfType(Entreprise.class).values();
+		for(Cotisation cotisation : collecCotisations)
 		{
-			System.out.println("test");
 			em.persist(cotisation);
+		}
+		
+		for(Entreprise entreprise : collecEntreprises)
+		{
+			em.persist(entreprise);
 		}
 	}
 }
