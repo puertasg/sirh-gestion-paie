@@ -12,7 +12,8 @@ import javax.persistence.Id;
 public class Avantage {
 
 	@Id
-	@Column(name = "id", unique = true, nullable = false)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_avantage", unique = true, nullable = false)
 	private Integer id;
 
 	@Column(name = "CODE", nullable = false)

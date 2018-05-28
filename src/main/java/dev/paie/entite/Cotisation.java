@@ -13,7 +13,7 @@ public class Cotisation {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id", unique = true, nullable = false)
+	@Column(name="id_cotisation", unique = true, nullable = false)
 	private Integer id;
 	
 	@Column(name="CODE", nullable = false)
@@ -27,7 +27,6 @@ public class Cotisation {
 	
 	@Column(name="TAUX_PATRONAL", nullable = true)
 	private BigDecimal tauxPatronal;
-	
 	
 	public String getCode() {
 		return code;
