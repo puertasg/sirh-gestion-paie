@@ -12,51 +12,30 @@
 	integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
 	crossorigin="anonymous">
 
-<title>Créer Employe</title>
+<title>Créer Bulletin de Salaire</title>
 </head>
 <body>
 	<div class="container">
-		<h1>Créer Employe</h1>
-		<p>Préfixe Matricule : ${prefixMatricule}</p>
+		<h1>Créer Bulletin de Salaire</h1>
 		
-		<form:form method="post" modelAttribute="remEmploye">
-		
-			<div class="form-group row">
+		<form:form method="post" modelAttribute="bulletin">
+
+            <div class="form-group row">
+                <label for="inputPeriode" class="col-form-label col-4">Periode</label>
+                <div class="col-8 pr-0">
+                    <form:select path="periode.id" items="${listEntreprise}" itemValue="id" id="inputPeriode" class="form-control"></form:select>
+                    <div class="invalid-feedback">
+                        La période est obligatoire.
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
                 <label for="inputMatricule" class="col-form-label col-4">Matricule</label>
                 <div class="col-8 pr-0">
-                    <form:input path="matricule" id="inputMatricule" class="form-control" />
+                    <form:select path="remunerationEmploye.id" items="${listeRemunerationEmploye}" itemValue="id" id="inputMatricule" class="form-control"></form:select>
                     <div class="invalid-feedback">
                         Le matricule est obligatoire.
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <label for="inputEntreprise" class="col-form-label col-4">Entreprise</label>
-                <div class="col-8 pr-0">
-                    <form:select path="entreprise.id" items="${listEntreprise}" itemValue="id" id="inputEntreprise" class="form-control"></form:select>
-                    <div class="invalid-feedback">
-                        L'entreprise est obligatoire.
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <label for="inputProfilRemuneration" class="col-form-label col-4">Profil de rémunération</label>
-                <div class="col-8 pr-0">
-                    <form:select path="profilRemuneration.id" items="${listProfils}" itemValue="id" id="inputProfilRemuneration" class="form-control"></form:select>
-                    <div class="invalid-feedback">
-                        Le profil de rémunération est obligatoire.
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <label for="inputGrade" class="col-form-label col-4">Grade</label>
-                <div class="col-8 pr-0">
-                    <form:select path="grade.id" items="${listGrades}" itemValue="id" id="inputGrade" class="form-control"></form:select>
-                    <div class="invalid-feedback">
-                        Le grade est obligatoire.
                     </div>
                 </div>
             </div>
