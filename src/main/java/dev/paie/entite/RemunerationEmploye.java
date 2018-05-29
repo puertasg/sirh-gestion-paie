@@ -80,9 +80,12 @@ public class RemunerationEmploye {
 	public void setDateCreation(ZonedDateTime dateCreation) {
 		this.dateCreation = dateCreation;
 	}
-	
-	public Date dateCreationToDate()
-	{
+
+	public Date dateCreationToDate() {
 		return Date.from(this.dateCreation.toInstant());
+	}
+
+	public String toString() {
+		return this.matricule;
 	}
 }

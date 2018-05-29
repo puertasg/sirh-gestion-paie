@@ -23,7 +23,7 @@
             <div class="form-group row">
                 <label for="inputPeriode" class="col-form-label col-4">Periode</label>
                 <div class="col-8 pr-0">
-                    <form:select path="periode.id" items="${listEntreprise}" itemValue="id" id="inputPeriode" class="form-control"></form:select>
+                    <form:select path="periode.id" items="${listPeriodes}" itemValue="id" id="inputPeriode" class="form-control"></form:select>
                     <div class="invalid-feedback">
                         La période est obligatoire.
                     </div>
@@ -36,6 +36,16 @@
                     <form:select path="remunerationEmploye.id" items="${listeRemunerationEmploye}" itemValue="id" id="inputMatricule" class="form-control"></form:select>
                     <div class="invalid-feedback">
                         Le matricule est obligatoire.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-group row">
+                <label for="inputPrimeExceptionnelle" class="col-form-label col-4">Prime exceptionelle</label>
+                <div class="col-8 pr-0">
+                    <form:input path="primeExceptionnelle" id="inputPrimeExceptionnelle" class="form-control" />
+                    <div class="invalid-feedback">
+                        La prime exceptionnelle est obligatoire.
                     </div>
                 </div>
             </div>

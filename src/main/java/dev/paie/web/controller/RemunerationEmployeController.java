@@ -25,16 +25,16 @@ import dev.paie.repository.RemunerationEmployeRepository;
 @Controller
 @RequestMapping("/employes")
 public class RemunerationEmployeController {
-	
+
 	@Autowired
 	private EntrepriseRepository entrepriseRepository;
-	
+
 	@Autowired
 	private ProfilRemunerationRepository profilRepository;
-	
+
 	@Autowired
 	private GradeRepository gradeRepository;
-	
+
 	@Autowired
 	private RemunerationEmployeRepository remunerationRepository;
 
@@ -47,40 +47,40 @@ public class RemunerationEmployeController {
 		RemunerationEmploye remEmploye = new RemunerationEmploye();
 		// Liaison du modèle et de l'objet.
 		model.addAttribute("remEmploye", remEmploye);
-		
-		//Récupère la liste des entreprises
+
+		// Récupère la liste des entreprises
 		List<Entreprise> listEntreprise = entrepriseRepository.findAll();
 		model.addAttribute("listEntreprise", listEntreprise);
-		
-		//Récupère la liste de profils
+
+		// Récupère la liste de profils
 		List<ProfilRemuneration> listProfils = profilRepository.findAll();
 		model.addAttribute("listProfils", listProfils);
-		
-		//Récupère la liste de grades
+
+		// Récupère la liste de grades
 		List<Grade> listGrades = gradeRepository.findAll();
 		model.addAttribute("listGrades", listGrades);
-		
+
 		// Renvoi du nom logique de la vue formulaire.
 		return mv;
 	}
-	
+
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView listerEmploye(Model model) {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("employes/employes");
 		List<RemunerationEmploye> remunerationEmploye = remunerationRepository.findAll();
-		
+
 		model.addAttribute("listeRemunerationEmploye", remunerationEmploye);
 		return mv;
 	}
-	
-	@RequestMapping(method = RequestMethod.POST, path="/creer")
+
+	@RequestMapping(method = RequestMethod.POST, path = "/creer")
 	public String submitForm(@ModelAttribute("remEmploye") RemunerationEmploye employe) {
-		
+
 		ZonedDateTime dateCreation = ZonedDateTime.of(LocalDateTime.now(), ZoneId.systemDefault());
 		employe.setDateCreation(dateCreation);
 		remunerationRepository.save(employe);
-		
+
 		return "redirect:/mvc/employes";
 	}
 }

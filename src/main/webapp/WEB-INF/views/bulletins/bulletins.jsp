@@ -13,19 +13,19 @@
 	integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
 	crossorigin="anonymous">
 
-<title>Liste des employés</title>
+<title>Liste des bulletins</title>
 </head>
 <body>
 
 	<div class="container">
 		<div class="row">
-			<h1>Employés</h1>
+			<h1>Bulletins</h1>
 		</div>
 
 		<div class="row">
 			<div class="ml-auto p-1">
-				<a href="./employes/creer" class="btn btn-primary">Ajouter un
-					employé</a>
+				<a href="./bulletins/creer" class="btn btn-primary">Ajouter un
+					bulletin de salaire</a>
 			</div>
 		</div>
 
@@ -34,19 +34,26 @@
 				<thead>
 					<tr>
 						<th>Date/heure de création</th>
+						<th>Période</th>
 						<th>Matricule</th>
-						<th>Grade</th>
+						<th>Salaire brut</th>
+						<th>Net imposable</th>
+						<th>Net à payer</th>
+						<th>Actions</th>
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach var="listeRemunerationEmploye"
-						items="${listeRemunerationEmploye}">
+					<c:forEach var="mapCalculs" items="${mapCalculs}">
 						<tr>
 							<td><fmt:formatDate
-									value="${listeRemunerationEmploye.dateCreationToDate()}"
+									value="${mapCalculs.key.dateCreationToDate()}"
 									pattern="dd/MM/yyyy HH:mm" /></td>
-							<td>${listeRemunerationEmploye.matricule}</td>
-							<td>${listeRemunerationEmploye.grade}</td>
+							<td>${mapCalculs.key.periode}</td>
+							<td>${mapCalculs.key.remunerationEmploye.matricule}</td>
+							<td>${mapCalculs.value.salaireBrut}</td>
+							<td>${mapCalculs.value.netImposable}</td>
+							<td>${mapCalculs.value.netAPayer}</td>
+							<td><a href="/bulletins/${mapsCalculs.key.id}">Visualiser</a></td>
 						</tr>
 					</c:forEach>
 				</tbody>

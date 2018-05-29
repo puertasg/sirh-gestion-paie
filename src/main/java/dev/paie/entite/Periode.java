@@ -1,12 +1,15 @@
 package dev.paie.entite;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Periode {
@@ -21,6 +24,9 @@ public class Periode {
 	
 	@Column(name = "DATE_FIN", nullable = false)
 	private LocalDate dateFin;
+	
+	@OneToMany(mappedBy="periode")
+	private List<BulletinSalaire> listeBulletins;
 	
 	public LocalDate getDateDebut() {
 		return dateDebut;
@@ -41,7 +47,12 @@ public class Periode {
 		this.id = id;
 	}
 	
-	
+	public String toString()
+	{
+		String dateDebutFormat = this.dateDebut.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+		String dateFinFormat = this.dateFin.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+		return dateDebutFormat + " - " + dateFinFormat;
+	}
 	
 	
 

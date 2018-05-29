@@ -1,18 +1,26 @@
 package dev.paie.service;
 
 import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import dev.paie.entite.BulletinSalaire;
 import dev.paie.entite.Cotisation;
 import dev.paie.entite.Grade;
 import dev.paie.entite.ResultatCalculRemuneration;
+import dev.paie.repository.BulletinSalaireRepository;
 import dev.paie.util.PaieUtils;
 
 @Component
 public class CalculerRemunerationServiceSimple implements CalculerRemunerationService {
+
+	@Autowired
+	private BulletinSalaireRepository bulletinSalaireRepository;
 
 	@Override
 	public ResultatCalculRemuneration calculer(BulletinSalaire bulletin) {
@@ -72,4 +80,16 @@ public class CalculerRemunerationServiceSimple implements CalculerRemunerationSe
 		return resultat;
 	}
 
+	@Transactional
+	public Map<BulletinSalaire, ResultatCalculRemuneration> mapBulletinResultatCalcul() {
+
+		List<BulletinSalaire> listeBulletins = bulletinSalaireRepository.findAll();
+		Map<BulletinSalaire, ResultatCalculRemuneration> map = new HashMap<BulletinSalaire, ResultatCalculRemuneration>();
+		for (BulletinSalaire bulletin : listeBulletins) {
+			ResultatCalculRemuneration resCalc = this.calculer(bulletin);
+			map.put(bulletin, resCalc);
+		}
+
+		return map;
+	}
 }
