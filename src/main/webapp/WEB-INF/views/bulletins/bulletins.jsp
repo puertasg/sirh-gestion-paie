@@ -48,12 +48,13 @@
 							<td><fmt:formatDate
 									value="${mapCalculs.key.dateCreationToDate()}"
 									pattern="dd/MM/yyyy HH:mm" /></td>
-							<td>${mapCalculs.key.periode}</td>
+							<td>${mapCalculs.key.id}</td>
 							<td>${mapCalculs.key.remunerationEmploye.matricule}</td>
 							<td>${mapCalculs.value.salaireBrut}</td>
 							<td>${mapCalculs.value.netImposable}</td>
 							<td>${mapCalculs.value.netAPayer}</td>
-							<td><a href="/bulletins/${mapsCalculs.key.id}">Visualiser</a></td>
+							<td><a
+								href='<c:url value="/mvc/bulletins/${mapCalculs.key.id}"></c:url>'>Visualiser</a></td>
 						</tr>
 					</c:forEach>
 				</tbody>
