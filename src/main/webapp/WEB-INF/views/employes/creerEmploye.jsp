@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -11,6 +12,11 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
 	integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
 	crossorigin="anonymous">
+
+<c:if test="${param.errorMatricule == 'error'}">
+	<link rel="stylesheet"
+		href="${pageContext.servletContext.contextPath}/resources/css/styleErrors.css">
+</c:if>
 
 <title>Créer Employe</title>
 </head>
@@ -26,7 +32,8 @@
 				<div class="col-8 pr-0">
 					<form:input path="matricule" id="inputMatricule"
 						class="form-control" />
-					<div id="invalidMatricule" class="invalid-feedback">Le matricule n'a pas été trouvé.</div>
+					<div id="invalidMatricule" class="invalid-feedback">Le
+						matricule n'a pas été trouvé.</div>
 				</div>
 			</div>
 
@@ -69,9 +76,6 @@
 		</form:form>
 	</div>
 
-	<input id="inputErrorMatricule" type="hidden"
-		value="${param.errorMatricule}" />
-
 	<!-- Optional JavaScript -->
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -85,14 +89,6 @@
 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"
 		integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
 		crossorigin="anonymous"></script>
-
-	<script>
-        if($("#inputErrorMatricule").val() == "error")
-        {
-            $("#inputMatricule").css("border-color", "#DC3545");
-            $("#invalidMatricule").css("display", "block");
-        }
-    </script>
 
 </body>
 </html>
