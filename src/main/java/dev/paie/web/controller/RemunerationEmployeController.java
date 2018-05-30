@@ -3,7 +3,6 @@ package dev.paie.web.controller;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,9 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import dev.paie.entite.Entreprise;
-import dev.paie.entite.Grade;
-import dev.paie.entite.ProfilRemuneration;
 import dev.paie.entite.RemunerationEmploye;
 import dev.paie.repository.EntrepriseRepository;
 import dev.paie.repository.GradeRepository;
@@ -48,17 +44,9 @@ public class RemunerationEmployeController {
 		// Liaison du modèle et de l'objet.
 		model.addAttribute("remEmploye", remEmploye);
 
-		// Récupère la liste des entreprises
-		List<Entreprise> listEntreprise = entrepriseRepository.findAll();
-		model.addAttribute("listEntreprise", listEntreprise);
-
-		// Récupère la liste de profils
-		List<ProfilRemuneration> listProfils = profilRepository.findAll();
-		model.addAttribute("listProfils", listProfils);
-
-		// Récupère la liste de grades
-		List<Grade> listGrades = gradeRepository.findAll();
-		model.addAttribute("listGrades", listGrades);
+		model.addAttribute("listEntreprise", entrepriseRepository.findAll());
+		model.addAttribute("listProfils", profilRepository.findAll());
+		model.addAttribute("listGrades", gradeRepository.findAll());
 
 		// Renvoi du nom logique de la vue formulaire.
 		return mv;
@@ -68,9 +56,8 @@ public class RemunerationEmployeController {
 	public ModelAndView listerEmploye(Model model) {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("employes/employes");
-		List<RemunerationEmploye> remunerationEmploye = remunerationRepository.findAll();
 
-		model.addAttribute("listeRemunerationEmploye", remunerationEmploye);
+		model.addAttribute("listeRemunerationEmploye", remunerationRepository.findAll());
 		return mv;
 	}
 
