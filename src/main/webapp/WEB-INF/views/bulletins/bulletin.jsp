@@ -27,7 +27,9 @@
 				<div class="row">
 					<strong>Période</strong>
 				</div>
-				<div class="row">Du 01/01/2018 au 01/01/2018</div>
+				<div class="row"><fmt:formatDate
+									value="${bulletinAvecCalcul.key.dateCreationToDate()}"
+									pattern="dd/MM/yyyy HH:mm" /></div>
 			</div>
 		</div>
 
@@ -89,7 +91,7 @@
 						<td>Salaire Brut</td>
 						<td></td>
 						<td></td>
-						<td>montant salarial ici</td>
+						<td>${bulletinAvecCalcul.value.salaireBrut}</td>
 						<td></td>
 						<td></td>
 					</tr>
