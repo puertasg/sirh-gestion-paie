@@ -3,6 +3,7 @@ package dev.paie.web.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,9 +26,9 @@ public class CotisationController {
 		return cotisationRepository.findAll();
 	}
 
-	@RequestMapping(method = RequestMethod.GET, value = "/{id}")
-	public Cotisation retournerCotisation(@PathVariable(value = "id") int id) {
-		Cotisation cotisation = cotisationRepository.findOne(id);
+	@RequestMapping(method = RequestMethod.GET, value = "/{code}")
+	public Cotisation retournerCotisation(@PathVariable(value = "code") String code) {
+		Cotisation cotisation = cotisationRepository.findByCode(code);
 
 		if (cotisation != null) {
 			return cotisation;
@@ -41,9 +42,9 @@ public class CotisationController {
 		cotisationRepository.save(cotisation);
 	}
 
-	@RequestMapping(method = RequestMethod.PUT, value = "/{id}")
-	public void updateCotisation(@PathVariable(value = "id") int id, @RequestBody Cotisation cotisation) {
-		Cotisation nouvelleCotisation = cotisationRepository.findOne(id);
+	@RequestMapping(method = RequestMethod.PUT, value = "/{code}")
+	public void updateCotisation(@PathVariable(value = "code") String code, @RequestBody Cotisation cotisation) {
+		Cotisation nouvelleCotisation = cotisationRepository.findByCode(code);
 
 		nouvelleCotisation.setCode(cotisation.getCode());
 		nouvelleCotisation.setLibelle(cotisation.getLibelle());
@@ -53,8 +54,9 @@ public class CotisationController {
 		cotisationRepository.save(nouvelleCotisation);
 	}
 
-	@RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
-	public void deleteCotisation(@PathVariable(value = "id") int id) {
-		cotisationRepository.delete(id);
+	@Transactional
+	@RequestMapping(method = RequestMethod.DELETE, value = "/{code}")
+	public void deleteCotisation(@PathVariable(value = "code") String code) {
+		cotisationRepository.deleteByCode(code);
 	}
 }
