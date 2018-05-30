@@ -13,10 +13,9 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 @ComponentScan("dev.paie.web")
 @Import(ServicesConfig.class)
 public class WebAppConfig {
-	
+
 	@Bean
-	public ViewResolver viewResolver()
-	{
+	public ViewResolver viewResolver() {
 		return new InternalResourceViewResolver("/WEB-INF/views/", ".jsp");
 	}
 }
