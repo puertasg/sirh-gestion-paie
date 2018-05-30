@@ -2,7 +2,6 @@ package dev.paie.service;
 
 import java.time.LocalDate;
 import java.time.temporal.TemporalAdjusters;
-import java.util.Collection;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
@@ -29,31 +28,6 @@ public class InitialiserDonneesServiceDev implements InitialiserDonneesService {
 	@Override
 	public void initialiser() {
 
-		/*
-		 * ClassPathXmlApplicationContext context = new
-		 * ClassPathXmlApplicationContext("cotisations-imposables.xml",
-		 * "cotisations-non-imposables.xml", "entreprises.xml", "grades.xml",
-		 * "profils-remuneration.xml"); Collection<Cotisation> collecCotisations
-		 * = context.getBeansOfType(Cotisation.class).values();
-		 * Collection<Entreprise> collecEntreprises =
-		 * context.getBeansOfType(Entreprise.class).values(); Collection<Grade>
-		 * collecGrades = context.getBeansOfType(Grade.class).values();
-		 * Collection<ProfilRemuneration> collecProfilsRemuneration =
-		 * context.getBeansOfType(ProfilRemuneration.class) .values();
-		 * 
-		 * insertCollec(collecCotisations); insertCollec(collecEntreprises);
-		 * insertCollec(collecGrades); insertCollec(collecProfilsRemuneration);
-		 * 
-		 * insertPeriode();
-		 * 
-		 * //Stream.of(Cotisation.class, Entreprise.class, Grade.class,
-		 * ProfilRemuneration.class).flatMap(uneClasse ->
-		 * context.getBeansOfType(uneClasse).values().stream()).foreach(em::
-		 * persist);
-		 * 
-		 * context.close();
-		 */
-
 		try (ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("cotisations-imposables.xml",
 				"cotisations-non-imposables.xml", "entreprises.xml", "grades.xml", "profils-remuneration.xml")) {
 
@@ -71,26 +45,5 @@ public class InitialiserDonneesServiceDev implements InitialiserDonneesService {
 
 		// Désormais gérer par try() => Concept Try-with-resources de Java 7
 		// ctx.close();
-	}
-
-	private <T> void insertCollec(Collection<T> collection) {
-		for (T element : collection) {
-			em.persist(element);
-		}
-	}
-
-	private void insertPeriode() {
-		LocalDate aujourdhui = LocalDate.now();
-		LocalDate debutPeriode = LocalDate.of(aujourdhui.getYear(), 1, 1);
-
-		while (debutPeriode.getYear() < aujourdhui.plusYears(1).getYear()) {
-			Periode periode = new Periode();
-			periode.setDateDebut(debutPeriode);
-			periode.setDateFin(debutPeriode.plusMonths(1).minusDays(1));
-
-			em.persist(periode);
-
-			debutPeriode = debutPeriode.plusMonths(1);
-		}
 	}
 }
