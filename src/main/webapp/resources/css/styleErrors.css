@@ -1,0 +1,7 @@
+#inputMatricule {
+	border-color: #DC3545;
+}
+
+#invalidMatricule {
+	display: block;
+}
