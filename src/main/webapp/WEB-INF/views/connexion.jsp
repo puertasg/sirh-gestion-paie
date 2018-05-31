@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>Paie - App</title>
 <link rel="stylesheet"
-	href='<c:url value="/bootstrap-4.1.1-dist/css/bootstrap.min.css"></c:url>'>
+	href='<c:url value="/resources/bootstrap-4.1.1-dist/css/bootstrap.min.css"></c:url>'>
 </head>
 <body class="container">
 

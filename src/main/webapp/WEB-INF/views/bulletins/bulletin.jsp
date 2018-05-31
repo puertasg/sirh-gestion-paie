@@ -9,7 +9,7 @@
 
 <!-- Bootstrap CSS -->
 <link rel="stylesheet"
-	href="/bootstrap-4.1.1-dist/css/bootstrap.min.css">
+	href="resources/bootstrap-4.1.1-dist/css/bootstrap.min.css">
 
 <title>Bulletin</title>
 </head>

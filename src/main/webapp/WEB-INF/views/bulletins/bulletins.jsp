@@ -9,7 +9,7 @@
 
 <!-- Bootstrap CSS -->
 <link rel="stylesheet"
-	href="/bootstrap-4.1.1-dist/css/bootstrap.min.css">
+	href="<c:out value="${pageContext.servletContext.contextPath}" />/resources/bootstrap-4.1.1-dist/css/bootstrap.min.css">
 
 <title>Liste des bulletins</title>
 </head>

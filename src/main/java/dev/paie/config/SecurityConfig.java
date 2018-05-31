@@ -49,7 +49,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers("/bootstrap-4.1.1-dist/**").permitAll();
-		http.authorizeRequests().anyRequest().authenticated().and().formLogin().loginPage("/mvc/connexion").permitAll();
+		http.authorizeRequests().antMatchers("/resources/**").permitAll()
+		.anyRequest().authenticated().and().formLogin().loginPage("/mvc/connexion").permitAll();
 	}
 }

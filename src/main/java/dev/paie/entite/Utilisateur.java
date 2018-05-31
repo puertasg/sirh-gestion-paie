@@ -2,13 +2,15 @@ package dev.paie.entite;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
 public class Utilisateur {
-
+	
 	public enum ROLES {
 		ROLE_ADMINISTRATEUR, ROLE_UTILISATEUR
 	}
@@ -26,7 +28,8 @@ public class Utilisateur {
 
 	@Column(name = "EST_ACTIF", nullable = false)
 	private Boolean estActif;
-
+	
+	@Enumerated(EnumType.STRING)
 	@Column(name = "ROLE", nullable = false)
 	private ROLES role;
 
