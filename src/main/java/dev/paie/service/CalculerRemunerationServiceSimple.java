@@ -1,9 +1,8 @@
 package dev.paie.service;
 
 import java.math.BigDecimal;
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -15,6 +14,7 @@ import dev.paie.entite.Grade;
 import dev.paie.entite.ResultatCalculRemuneration;
 import dev.paie.repository.BulletinSalaireRepository;
 import dev.paie.util.PaieUtils;
+import dev.paie.util.ResultatCalculBulletin;
 
 @Component
 public class CalculerRemunerationServiceSimple implements CalculerRemunerationService {
@@ -81,27 +81,28 @@ public class CalculerRemunerationServiceSimple implements CalculerRemunerationSe
 	}
 
 	@Transactional
-	public Map<BulletinSalaire, ResultatCalculRemuneration> mapBulletinResultatCalcul() {
+	public List<ResultatCalculBulletin> calculerListeBulletin() {
 
 		List<BulletinSalaire> listeBulletins = bulletinSalaireRepository.findAll();
-		Map<BulletinSalaire, ResultatCalculRemuneration> map = new HashMap<BulletinSalaire, ResultatCalculRemuneration>();
+		List<ResultatCalculBulletin> listeResultat = new ArrayList<>();
 		for (BulletinSalaire bulletin : listeBulletins) {
 			ResultatCalculRemuneration resCalc = this.calculer(bulletin);
-			map.put(bulletin, resCalc);
+
+			ResultatCalculBulletin resBulletin = new ResultatCalculBulletin(bulletin, resCalc);
+
+			listeResultat.add(resBulletin);
 		}
 
-		return map;
+		return listeResultat;
 	}
-	
+
 	@Transactional
-	public Map<BulletinSalaire, ResultatCalculRemuneration> mapBulletinResultatCalcul(int id) {
+	public ResultatCalculBulletin calculerBulletin(int id) {
 
 		BulletinSalaire bulletin = bulletinSalaireRepository.findOne(id);
-		
-		Map<BulletinSalaire, ResultatCalculRemuneration> map = new HashMap<BulletinSalaire, ResultatCalculRemuneration>();
 		ResultatCalculRemuneration resCalc = this.calculer(bulletin);
-		map.put(bulletin, resCalc);
+		ResultatCalculBulletin resBulletin = new ResultatCalculBulletin(bulletin, resCalc);
 
-		return map;
+		return resBulletin;
 	}
 }

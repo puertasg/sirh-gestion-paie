@@ -9,7 +9,7 @@
 
 <!-- Bootstrap CSS -->
 <link rel="stylesheet"
-	href="${pageContext.servletContext.contextPath}/bootstrap-4.1.1-dist/css/bootstrap.min.css">
+	href="${pageContext.servletContext.contextPath}/resources/bootstrap-4.1.1-dist/css/bootstrap.min.css">
 
 <title>Bulletin</title>
 </head>

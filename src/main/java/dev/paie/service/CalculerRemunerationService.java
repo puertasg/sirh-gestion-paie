@@ -1,14 +1,15 @@
 package dev.paie.service;
 
-import java.util.Map;
+import java.util.List;
 
 import dev.paie.entite.BulletinSalaire;
 import dev.paie.entite.ResultatCalculRemuneration;
+import dev.paie.util.ResultatCalculBulletin;
 
 public interface CalculerRemunerationService {
 	ResultatCalculRemuneration calculer(BulletinSalaire bulletin);
 
-	Map<BulletinSalaire, ResultatCalculRemuneration> mapBulletinResultatCalcul();
+	List<ResultatCalculBulletin> calculerListeBulletin();
 
-	Map<BulletinSalaire, ResultatCalculRemuneration> mapBulletinResultatCalcul(int id);
+	ResultatCalculBulletin calculerBulletin(int id);
 }
