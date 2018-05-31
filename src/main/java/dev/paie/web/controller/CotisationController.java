@@ -3,6 +3,7 @@ package dev.paie.web.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,11 +23,13 @@ public class CotisationController {
 	private CotisationRepository cotisationRepository;
 
 	@RequestMapping(method = RequestMethod.GET)
+	@Secured({ "ROLE_UTILISATEUR", "ROLE_ADMINISTRATEUR" })
 	public List<Cotisation> listerCotisations() {
 		return cotisationRepository.findAll();
 	}
 
 	@RequestMapping(method = RequestMethod.GET, value = "/{code}")
+	@Secured({ "ROLE_UTILISATEUR", "ROLE_ADMINISTRATEUR" })
 	public Cotisation retournerCotisation(@PathVariable(value = "code") String code) {
 		Cotisation cotisation = cotisationRepository.findByCode(code);
 
@@ -38,11 +41,13 @@ public class CotisationController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
+	@Secured("ROLE_ADMINISTRATEUR")
 	public void insertCotisation(@RequestBody Cotisation cotisation) {
 		cotisationRepository.save(cotisation);
 	}
 
 	@RequestMapping(method = RequestMethod.PUT, value = "/{code}")
+	@Secured("ROLE_ADMINISTRATEUR")
 	public void updateCotisation(@PathVariable(value = "code") String code, @RequestBody Cotisation cotisation) {
 		Cotisation nouvelleCotisation = cotisationRepository.findByCode(code);
 
@@ -56,6 +61,7 @@ public class CotisationController {
 
 	@Transactional
 	@RequestMapping(method = RequestMethod.DELETE, value = "/{code}")
+	@Secured("ROLE_ADMINISTRATEUR")
 	public void deleteCotisation(@PathVariable(value = "code") String code) {
 		cotisationRepository.deleteByCode(code);
 	}

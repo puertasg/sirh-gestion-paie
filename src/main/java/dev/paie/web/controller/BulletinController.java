@@ -6,6 +6,7 @@ import java.time.ZonedDateTime;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -38,6 +39,7 @@ public class BulletinController {
 	private CalculerRemunerationService calc;
 
 	@RequestMapping(method = RequestMethod.GET, path = "/creer")
+	@Secured("ROLE_ADMINISTRATEUR")
 	public ModelAndView creerBulletin(Model model) {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("bulletins/creerBulletin");
@@ -54,6 +56,7 @@ public class BulletinController {
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
+	@Secured({ "ROLE_UTILISATEUR", "ROLE_ADMINISTRATEUR" })
 	public ModelAndView listerEmploye(Model model) {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("bulletins/bulletins");
@@ -64,6 +67,7 @@ public class BulletinController {
 	}
 
 	@RequestMapping(method = RequestMethod.GET, value = "/{id}")
+	@Secured({ "ROLE_UTILISATEUR", "ROLE_ADMINISTRATEUR" })
 	public ModelAndView afficherBulletin(Model model, @PathVariable(value = "id") int id) {
 
 		Map<BulletinSalaire, ResultatCalculRemuneration> bulletinAvecCalcul = calc.mapBulletinResultatCalcul(id);
@@ -76,6 +80,7 @@ public class BulletinController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST, path = "/creer")
+	@Secured("ROLE_ADMINISTRATEUR")
 	public String submitForm(@ModelAttribute("bulletin") BulletinSalaire bulletin) {
 		ZonedDateTime dateCreation = ZonedDateTime.of(LocalDateTime.now(), ZoneId.systemDefault());
 		bulletin.setDateCreation(dateCreation);
