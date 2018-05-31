@@ -1,15 +1,31 @@
 package dev.paie.entite;
 
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 public class Utilisateur {
 
 	public enum ROLES {
 		ROLE_ADMINISTRATEUR, ROLE_UTILISATEUR
 	}
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id", unique = true, nullable = false)
 	private Integer id;
+
+	@Column(name = "NOM_UTILISATEUR", unique = true, nullable = false)
 	private String nomUtilisateur;
+
+	@Column(name = "MOT_DE_PASSE", nullable = false)
 	private String motDePasse;
+
+	@Column(name = "EST_ACTIF", nullable = false)
 	private Boolean estActif;
+
+	@Column(name = "ROLE", nullable = false)
 	private ROLES role;
 
 	public Integer getId() {
