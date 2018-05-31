@@ -8,7 +8,7 @@
 
 <!-- Bootstrap CSS -->
 <link rel="stylesheet"
-	href="/bootstrap-4.1.1-dist/css/bootstrap.min.css">
+	href="${pageContext.servletContext.contextPath}/resources/bootstrap-4.1.1-dist/css/bootstrap.min.css">
 
 <title>Créer Bulletin de Salaire</title>
 </head>
@@ -64,6 +64,6 @@
 		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
 		crossorigin="anonymous"></script>
 
-	<script src="/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
+	<script src="${pageContext.servletContext.contextPath}/resources/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
