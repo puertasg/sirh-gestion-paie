@@ -60,7 +60,7 @@ public class BulletinController {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("bulletins/bulletins");
 
-		model.addAttribute("mapCalculs", calc.calculerListeBulletin());
+		model.addAttribute("listBulletinAvecCalcul", calc.calculerListeBulletin());
 
 		return mv;
 	}
