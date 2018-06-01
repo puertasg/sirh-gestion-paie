@@ -16,12 +16,18 @@
 		href="${pageContext.servletContext.contextPath}/resources/css/styleErrors.css">
 </c:if>
 
-<title>Créer Employe</title>
+<title>Créer Employé</title>
 </head>
 <body>
 	<div class="container">
+		<nav aria-label="breadcrumb">
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item"><a href="/paie/index.html">Accueil</a></li>
+				<li class="breadcrumb-item"><a href="../employes">Employés</a></li>
+				<li class="breadcrumb-item active" aria-current="page">Créer</li>
+			</ol>
+		</nav>
 		<h1>Créer Employe</h1>
-		<p>Préfixe Matricule : ${prefixMatricule}</p>
 
 		<form:form method="post" modelAttribute="remEmploye">
 
