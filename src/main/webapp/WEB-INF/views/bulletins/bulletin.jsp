@@ -34,7 +34,7 @@
 					<strong>Période</strong>
 				</div>
 				<div class="row">
-					${bulletinAvecCalcul.bulletin.periode.toString()}</div>
+					${bulletinAvecCalcul.bulletin.periode}</div>
 			</div>
 		</div>
 
