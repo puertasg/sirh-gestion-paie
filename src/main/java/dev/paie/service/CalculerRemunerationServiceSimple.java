@@ -48,11 +48,11 @@ public class CalculerRemunerationServiceSimple implements CalculerRemunerationSe
 				.filter(cot -> cot.getTauxSalarial() != null).map(cot -> cot.getTauxSalarial().multiply(salaireBrut))
 				.reduce(BigDecimal::add).get();
 		String totalRetenueSalarialeFormat = paieUtils.formaterBigDecimal(totalRetenueSalariale);
-		
-		//Calcul total taux salarial
+
+		// Calcul total taux salarial
 		BigDecimal totalTauxSalarial = listCotisationsNonImposables.stream()
-				.filter(cot -> cot.getTauxSalarial() != null).map(cot -> cot.getTauxSalarial())
-				.reduce(BigDecimal::add).get();
+				.filter(cot -> cot.getTauxSalarial() != null).map(cot -> cot.getTauxSalarial()).reduce(BigDecimal::add)
+				.get();
 		String totalTauxSalarialFormat = paieUtils.formaterBigDecimal(totalTauxSalarial);
 
 		// Calcul total cotisations patronales
@@ -60,19 +60,18 @@ public class CalculerRemunerationServiceSimple implements CalculerRemunerationSe
 				.filter(cot -> cot.getTauxPatronal() != null).map(cot -> cot.getTauxPatronal().multiply(salaireBrut))
 				.reduce(BigDecimal::add).get();
 		String totalCotisationsPatronalesFormat = paieUtils.formaterBigDecimal(totalCotisationsPatronales);
-		
-		//Calcul total cotisations patronales imposables
+
+		// Calcul total cotisations patronales imposables
 		BigDecimal totalCotisationsPatronalesImposables = new BigDecimal("0");
-		for(Cotisation cotisationImposable : listCotisationsImposables)
-		{
-			if(cotisationImposable.getTauxPatronal() != null)
-			{
+		for (Cotisation cotisationImposable : listCotisationsImposables) {
+			if (cotisationImposable.getTauxPatronal() != null) {
 				totalCotisationsPatronalesImposables.add(cotisationImposable.getTauxPatronal().multiply(salaireBrut));
 			}
 		}
-		
-		String totalCotisationsPatronalesImposablesFormat = paieUtils.formaterBigDecimal(totalCotisationsPatronalesImposables);
-		
+
+		String totalCotisationsPatronalesImposablesFormat = paieUtils
+				.formaterBigDecimal(totalCotisationsPatronalesImposables);
+
 		// Calcul net imposable
 		// De préférence passer par un nouvel objet BigDecimal pour un calcul
 		BigDecimal netImposable = new BigDecimal(salaireBrutFormat)

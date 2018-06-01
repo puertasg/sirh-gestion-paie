@@ -41,7 +41,8 @@
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach var="bulletinAvecCalcul" items="${listBulletinAvecCalcul}">
+					<c:forEach var="bulletinAvecCalcul"
+						items="${listBulletinAvecCalcul}">
 						<tr>
 							<td><fmt:formatDate
 									value="${bulletinAvecCalcul.bulletin.dateCreationToDate()}"
@@ -66,6 +67,7 @@
 		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
 		crossorigin="anonymous"></script>
 
-	<script src="${pageContext.servletContext.contextPath}/resources/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
+	<script
+		src="${pageContext.servletContext.contextPath}/resources/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

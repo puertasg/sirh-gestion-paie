@@ -11,8 +11,7 @@ public class ResultatCalculRemuneration {
 	private String totalCotisationsImposables;
 	private String netImposable;
 	private String netAPayer;
-	
-	
+
 	public String getSalaireDeBase() {
 		return salaireDeBase;
 	}
