@@ -42,7 +42,8 @@
 					<span class="text-uppercase">${bulletinAvecCalcul.bulletin.remunerationEmploye.entreprise.denomination}</span>
 				</div>
 				<div class="row">
-					<span>SIRET : ${bulletinAvecCalcul.bulletin.remunerationEmploye.entreprise.siret}</span>
+					<span>SIRET :
+						${bulletinAvecCalcul.bulletin.remunerationEmploye.entreprise.siret}</span>
 				</div>
 			</div>
 		</div>
@@ -51,7 +52,7 @@
 			<strong>Salaire</strong>
 		</div>
 		<div class="row">
-			<table class="table table-bordered table-striped">
+			<table class="table table-bordered table-striped table-sm">
 				<thead>
 					<tr>
 						<th>Rubriques</th>
@@ -66,7 +67,7 @@
 					<tr>
 						<td>Salaire de base</td>
 						<td>${bulletinAvecCalcul.resultatCalculRemuneration.salaireDeBase}</td>
-						<td>taux salarial ici</td>
+						<td>${bulletinAvecCalcul.resultatCalculRemuneration.totalTauxSalarial}</td>
 						<td></td>
 						<td></td>
 						<td></td>
@@ -76,14 +77,6 @@
 						<td></td>
 						<td></td>
 						<td>${bulletinAvecCalcul.bulletin.primeExceptionnelle}</td>
-						<td></td>
-						<td></td>
-					</tr>
-					<tr>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
 						<td></td>
 						<td></td>
 					</tr>
@@ -104,7 +97,7 @@
 		</div>
 		<!-- boucler cotisation non imposables -->
 		<div class="row">
-			<table class="table table-bordered table-striped">
+			<table class="table table-bordered table-striped table-sm">
 				<thead>
 					<tr>
 						<th>Rubriques</th>
@@ -116,16 +109,20 @@
 					</tr>
 				</thead>
 				<tbody>
-					<!-- début for ici -->
-					<tr>
-						<td>Rubrique ici</td>
-						<td>base ici</td>
-						<td>taux salarial ici</td>
-						<td>montant salarial ici</td>
-						<td>taux patronal ici</td>
-						<td>cot patronale ici</td>
-					</tr>
-					<!-- fin for ici -->
+					<c:forEach var="cotisationNonImposable"
+						items="${bulletinAvecCalcul.bulletin.remunerationEmploye.profilRemuneration.cotisationsNonImposables}">
+						<tr>
+							<td>${cotisationNonImposable.code}
+								${cotisationNonImposable.libelle}</td>
+							<td>${bulletinAvecCalcul.resultatCalculRemuneration.salaireBrut}</td>
+							<td>${cotisationNonImposable.tauxSalarial}</td>
+							<td><c:out
+									value="${cotisationNonImposable.tauxSalarial * bulletinAvecCalcul.resultatCalculRemuneration.salaireBrut}"></c:out></td>
+							<td>${cotisationNonImposable.tauxPatronal}</td>
+							<td><c:out
+									value="${cotisationNonImposable.tauxPatronal * bulletinAvecCalcul.resultatCalculRemuneration.salaireBrut}"></c:out></td>
+						</tr>
+					</c:forEach>
 					<tr>
 						<td>Total retenue</td>
 						<td></td>
@@ -144,7 +141,7 @@
 		</div>
 		<!-- boucler cotisation imposables -->
 		<div class="row">
-			<table class="table table-bordered table-striped">
+			<table class="table table-bordered table-striped table-sm">
 				<thead>
 					<tr>
 						<th>Rubriques</th>
@@ -156,23 +153,27 @@
 					</tr>
 				</thead>
 				<tbody>
-					<!-- début for ici -->
-					<tr>
-						<td>Rubrique ici</td>
-						<td>base ici</td>
-						<td>taux salarial ici</td>
-						<td>montant salarial ici</td>
-						<td>taux patronal ici</td>
-						<td>cot patronale ici</td>
-					</tr>
-					<!-- fin for ici -->
+					<c:forEach var="cotisationImposable"
+						items="${bulletinAvecCalcul.bulletin.remunerationEmploye.profilRemuneration.cotisationsImposables}">
+						<tr>
+							<td>${cotisationImposable.code}
+								${cotisationImposable.libelle}</td>
+							<td>${bulletinAvecCalcul.resultatCalculRemuneration.salaireBrut}</td>
+							<td>${cotisationImposable.tauxSalarial}</td>
+							<td><c:out
+									value="${cotisationImposable.tauxSalarial * bulletinAvecCalcul.resultatCalculRemuneration.salaireBrut}"></c:out></td>
+							<td>${cotisationImposable.tauxPatronal}</td>
+							<td><c:out
+									value="${cotisationImposable.tauxPatronal * bulletinAvecCalcul.resultatCalculRemuneration.salaireBrut}"></c:out></td>
+						</tr>
+					</c:forEach>
 					<tr>
 						<td>Total retenue</td>
 						<td></td>
 						<td></td>
-						<td>total montant salarial ici</td>
+						<td>${bulletinAvecCalcul.resultatCalculRemuneration.totalCotisationsImposables}</td>
 						<td></td>
-						<td>total cot patronale ici</td>
+						<td>${bulletinAvecCalcul.resultatCalculRemuneration.totalCotisationsPatronalesImposables}</td>
 					</tr>
 				</tbody>
 			</table>
@@ -181,7 +182,8 @@
 		<div class="row">
 			<div class="ml-auto p-1">
 				<div class="row">
-					<strong>Net à payer : ${bulletinAvecCalcul.resultatCalculRemuneration.netAPayer}</strong>
+					<strong>Net à payer :
+						${bulletinAvecCalcul.resultatCalculRemuneration.netAPayer}</strong>
 				</div>
 			</div>
 		</div>

@@ -48,13 +48,31 @@ public class CalculerRemunerationServiceSimple implements CalculerRemunerationSe
 				.filter(cot -> cot.getTauxSalarial() != null).map(cot -> cot.getTauxSalarial().multiply(salaireBrut))
 				.reduce(BigDecimal::add).get();
 		String totalRetenueSalarialeFormat = paieUtils.formaterBigDecimal(totalRetenueSalariale);
+		
+		//Calcul total taux salarial
+		BigDecimal totalTauxSalarial = listCotisationsNonImposables.stream()
+				.filter(cot -> cot.getTauxSalarial() != null).map(cot -> cot.getTauxSalarial())
+				.reduce(BigDecimal::add).get();
+		String totalTauxSalarialFormat = paieUtils.formaterBigDecimal(totalTauxSalarial);
 
 		// Calcul total cotisations patronales
 		BigDecimal totalCotisationsPatronales = listCotisationsNonImposables.stream()
 				.filter(cot -> cot.getTauxPatronal() != null).map(cot -> cot.getTauxPatronal().multiply(salaireBrut))
 				.reduce(BigDecimal::add).get();
 		String totalCotisationsPatronalesFormat = paieUtils.formaterBigDecimal(totalCotisationsPatronales);
-
+		
+		//Calcul total cotisations patronales imposables
+		BigDecimal totalCotisationsPatronalesImposables = new BigDecimal("0");
+		for(Cotisation cotisationImposable : listCotisationsImposables)
+		{
+			if(cotisationImposable.getTauxPatronal() != null)
+			{
+				totalCotisationsPatronalesImposables.add(cotisationImposable.getTauxPatronal().multiply(salaireBrut));
+			}
+		}
+		
+		String totalCotisationsPatronalesImposablesFormat = paieUtils.formaterBigDecimal(totalCotisationsPatronalesImposables);
+		
 		// Calcul net imposable
 		// De préférence passer par un nouvel objet BigDecimal pour un calcul
 		BigDecimal netImposable = new BigDecimal(salaireBrutFormat)
@@ -65,6 +83,7 @@ public class CalculerRemunerationServiceSimple implements CalculerRemunerationSe
 		BigDecimal totalCotisationsImposables = listCotisationsImposables.stream()
 				.filter(cot -> cot.getTauxSalarial() != null).map(cot -> cot.getTauxSalarial().multiply(salaireBrut))
 				.reduce(BigDecimal::add).get();
+		String totalCotisationsImposablesFormat = paieUtils.formaterBigDecimal(totalCotisationsImposables);
 		BigDecimal netAPayer = netImposable.subtract(totalCotisationsImposables);
 		String netAPayerFormat = paieUtils.formaterBigDecimal(netAPayer);
 
@@ -73,7 +92,10 @@ public class CalculerRemunerationServiceSimple implements CalculerRemunerationSe
 		resultat.setSalaireDeBase(salaireBaseFormat);
 		resultat.setSalaireBrut(salaireBrutFormat);
 		resultat.setTotalRetenueSalarial(totalRetenueSalarialeFormat);
+		resultat.setTotalTauxSalarial(totalTauxSalarialFormat);
 		resultat.setTotalCotisationsPatronales(totalCotisationsPatronalesFormat);
+		resultat.setTotalCotisationsPatronalesImposables(totalCotisationsPatronalesImposablesFormat);
+		resultat.setTotalCotisationsImposables(totalCotisationsImposablesFormat);
 		resultat.setNetImposable(netImposableFormat);
 		resultat.setNetAPayer(netAPayerFormat);
 
