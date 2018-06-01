@@ -16,6 +16,14 @@
 <body>
 
 	<div class="container">
+
+		<nav aria-label="breadcrumb">
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item"><a href="/paie/index.html">Accueil</a></li>
+				<li class="breadcrumb-item"><a href="../bulletins">Bulletins</a></li>
+				<li class="breadcrumb-item active" aria-current="page">Visualiser</li>
+			</ol>
+		</nav>
 		<div class="row">
 			<h1>Bulletin de salaire</h1>
 		</div>
@@ -26,7 +34,7 @@
 					<strong>Période</strong>
 				</div>
 				<div class="row">
-					${bulletinAvecCalcul.bulletin.periode.toString()}</div>
+					${bulletinAvecCalcul.bulletin.periode}</div>
 			</div>
 		</div>
 

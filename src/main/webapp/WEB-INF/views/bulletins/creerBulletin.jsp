@@ -14,6 +14,13 @@
 </head>
 <body>
 	<div class="container">
+		<nav aria-label="breadcrumb">
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item"><a href="/paie/index.html">Accueil</a></li>
+				<li class="breadcrumb-item"><a href="../bulletins">Bulletins</a></li>
+				<li class="breadcrumb-item active" aria-current="page">Créer</li>
+			</ol>
+		</nav>
 		<h1>Créer Bulletin de Salaire</h1>
 
 		<form:form method="post" modelAttribute="bulletin">
@@ -64,6 +71,7 @@
 		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
 		crossorigin="anonymous"></script>
 
-	<script src="${pageContext.servletContext.contextPath}/resources/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
+	<script
+		src="${pageContext.servletContext.contextPath}/resources/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

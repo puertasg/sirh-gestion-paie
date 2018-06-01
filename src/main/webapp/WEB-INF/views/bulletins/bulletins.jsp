@@ -16,6 +16,13 @@
 <body>
 
 	<div class="container">
+		<nav aria-label="breadcrumb">
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item"><a href="/paie/index.html">Accueil</a></li>
+				<li class="breadcrumb-item active">Bulletins</li>
+			</ol>
+		</nav>
+		
 		<div class="row">
 			<h1>Bulletins</h1>
 		</div>
