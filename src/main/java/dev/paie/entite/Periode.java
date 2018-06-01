@@ -2,7 +2,6 @@ package dev.paie.entite;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.sql.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -51,14 +50,6 @@ public class Periode {
 
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	public Date dateDebutToDate() {
-		return Date.valueOf(this.dateDebut);
-	}
-
-	public Date dateFinToDate() {
-		return Date.valueOf(this.dateFin);
 	}
 
 	public String toString() {

@@ -26,14 +26,7 @@
 					<strong>Période</strong>
 				</div>
 				<div class="row">
-					<fmt:formatDate
-						value="${bulletinAvecCalcul.bulletin.periode.dateDebutToDate()}"
-						pattern="dd/MM/yyyy" />
-					-
-					<fmt:formatDate
-						value="${bulletinAvecCalcul.bulletin.periode.dateFinToDate()}"
-						pattern="dd/MM/yyyy" />
-				</div>
+					${bulletinAvecCalcul.bulletin.periode.toString()}</div>
 			</div>
 		</div>
 
