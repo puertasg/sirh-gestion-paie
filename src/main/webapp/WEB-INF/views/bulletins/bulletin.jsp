@@ -9,7 +9,7 @@
 
 <!-- Bootstrap CSS -->
 <link rel="stylesheet"
-	href="${pageContext.servletContext.contextPath}/bootstrap-4.1.1-dist/css/bootstrap.min.css">
+	href="${pageContext.servletContext.contextPath}/resources/bootstrap-4.1.1-dist/css/bootstrap.min.css">
 
 <title>Bulletin</title>
 </head>
@@ -27,7 +27,7 @@
 				</div>
 				<div class="row">
 					<fmt:formatDate
-						value="${bulletinAvecCalcul.key.dateCreationToDate()}"
+						value="${bulletinAvecCalcul.bulletin.dateCreationToDate()}"
 						pattern="dd/MM/yyyy HH:mm" />
 				</div>
 			</div>
@@ -39,10 +39,11 @@
 					<strong>Entreprise</strong>
 				</div>
 				<div class="row">
-					<span>DEV ENTREPRISE</span>
+					<span class="text-uppercase">${bulletinAvecCalcul.bulletin.remunerationEmploye.entreprise.denomination}</span>
 				</div>
 				<div class="row">
-					<span>SIRET :</span>
+					<span>SIRET :
+						${bulletinAvecCalcul.bulletin.remunerationEmploye.entreprise.siret}</span>
 				</div>
 			</div>
 		</div>
@@ -51,7 +52,7 @@
 			<strong>Salaire</strong>
 		</div>
 		<div class="row">
-			<table class="table table-bordered table-striped">
+			<table class="table table-bordered table-striped table-sm">
 				<thead>
 					<tr>
 						<th>Rubriques</th>
@@ -65,9 +66,9 @@
 				<tbody>
 					<tr>
 						<td>Salaire de base</td>
-						<td>base ici</td>
-						<td>taux salarial ici</td>
-						<td>montant salarial ici</td>
+						<td>${bulletinAvecCalcul.resultatCalculRemuneration.salaireDeBase}</td>
+						<td>${bulletinAvecCalcul.resultatCalculRemuneration.totalTauxSalarial}</td>
+						<td></td>
 						<td></td>
 						<td></td>
 					</tr>
@@ -75,15 +76,7 @@
 						<td>Prime Except.</td>
 						<td></td>
 						<td></td>
-						<td>montant salarial ici</td>
-						<td></td>
-						<td></td>
-					</tr>
-					<tr>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
+						<td>${bulletinAvecCalcul.bulletin.primeExceptionnelle}</td>
 						<td></td>
 						<td></td>
 					</tr>
@@ -91,7 +84,7 @@
 						<td>Salaire Brut</td>
 						<td></td>
 						<td></td>
-						<td>${bulletinAvecCalcul.value.salaireBrut}</td>
+						<td>${bulletinAvecCalcul.resultatCalculRemuneration.salaireBrut}</td>
 						<td></td>
 						<td></td>
 					</tr>
@@ -102,9 +95,9 @@
 		<div class="row mt-2">
 			<strong>Cotisations</strong>
 		</div>
-
+		<!-- boucler cotisation non imposables -->
 		<div class="row">
-			<table class="table table-bordered table-striped">
+			<table class="table table-bordered table-striped table-sm">
 				<thead>
 					<tr>
 						<th>Rubriques</th>
@@ -116,34 +109,39 @@
 					</tr>
 				</thead>
 				<tbody>
-					<!-- début for ici -->
-					<tr>
-						<td>Rubrique ici</td>
-						<td>base ici</td>
-						<td>taux salarial ici</td>
-						<td>montant salarial ici</td>
-						<td>taux patronal ici</td>
-						<td>cot patronale ici</td>
-					</tr>
-					<!-- fin for ici -->
+					<c:forEach var="cotisationNonImposable"
+						items="${bulletinAvecCalcul.bulletin.remunerationEmploye.profilRemuneration.cotisationsNonImposables}">
+						<tr>
+							<td>${cotisationNonImposable.code}
+								${cotisationNonImposable.libelle}</td>
+							<td>${bulletinAvecCalcul.resultatCalculRemuneration.salaireBrut}</td>
+							<td>${cotisationNonImposable.tauxSalarial}</td>
+							<td><c:out
+									value="${cotisationNonImposable.tauxSalarial * bulletinAvecCalcul.resultatCalculRemuneration.salaireBrut}"></c:out></td>
+							<td>${cotisationNonImposable.tauxPatronal}</td>
+							<td><c:out
+									value="${cotisationNonImposable.tauxPatronal * bulletinAvecCalcul.resultatCalculRemuneration.salaireBrut}"></c:out></td>
+						</tr>
+					</c:forEach>
 					<tr>
 						<td>Total retenue</td>
 						<td></td>
 						<td></td>
-						<td>total montant salarial ici</td>
+						<td>${bulletinAvecCalcul.resultatCalculRemuneration.totalRetenueSalarial}</td>
 						<td></td>
-						<td>total cot patronale ici</td>
+						<td>${bulletinAvecCalcul.resultatCalculRemuneration.totalCotisationsPatronales}</td>
 					</tr>
 				</tbody>
 			</table>
 		</div>
 
 		<div class="row mt-2">
-			<strong>NET Imposable : XXXX</strong>
+			<strong>NET Imposable :
+				${bulletinAvecCalcul.resultatCalculRemuneration.netImposable}</strong>
 		</div>
-
+		<!-- boucler cotisation imposables -->
 		<div class="row">
-			<table class="table table-bordered table-striped">
+			<table class="table table-bordered table-striped table-sm">
 				<thead>
 					<tr>
 						<th>Rubriques</th>
@@ -155,23 +153,27 @@
 					</tr>
 				</thead>
 				<tbody>
-					<!-- début for ici -->
-					<tr>
-						<td>Rubrique ici</td>
-						<td>base ici</td>
-						<td>taux salarial ici</td>
-						<td>montant salarial ici</td>
-						<td>taux patronal ici</td>
-						<td>cot patronale ici</td>
-					</tr>
-					<!-- fin for ici -->
+					<c:forEach var="cotisationImposable"
+						items="${bulletinAvecCalcul.bulletin.remunerationEmploye.profilRemuneration.cotisationsImposables}">
+						<tr>
+							<td>${cotisationImposable.code}
+								${cotisationImposable.libelle}</td>
+							<td>${bulletinAvecCalcul.resultatCalculRemuneration.salaireBrut}</td>
+							<td>${cotisationImposable.tauxSalarial}</td>
+							<td><c:out
+									value="${cotisationImposable.tauxSalarial * bulletinAvecCalcul.resultatCalculRemuneration.salaireBrut}"></c:out></td>
+							<td>${cotisationImposable.tauxPatronal}</td>
+							<td><c:out
+									value="${cotisationImposable.tauxPatronal * bulletinAvecCalcul.resultatCalculRemuneration.salaireBrut}"></c:out></td>
+						</tr>
+					</c:forEach>
 					<tr>
 						<td>Total retenue</td>
 						<td></td>
 						<td></td>
-						<td>total montant salarial ici</td>
+						<td>${bulletinAvecCalcul.resultatCalculRemuneration.totalCotisationsImposables}</td>
 						<td></td>
-						<td>total cot patronale ici</td>
+						<td>${bulletinAvecCalcul.resultatCalculRemuneration.totalCotisationsPatronalesImposables}</td>
 					</tr>
 				</tbody>
 			</table>
@@ -180,7 +182,8 @@
 		<div class="row">
 			<div class="ml-auto p-1">
 				<div class="row">
-					<strong>Net à payer</strong>
+					<strong>Net à payer :
+						${bulletinAvecCalcul.resultatCalculRemuneration.netAPayer}</strong>
 				</div>
 			</div>
 		</div>
@@ -191,6 +194,7 @@
 			integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
 			crossorigin="anonymous"></script>
 
-		<script src="${pageContext.servletContext.contextPath}/resources/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
+		<script
+			src="${pageContext.servletContext.contextPath}/resources/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

@@ -5,11 +5,13 @@ public class ResultatCalculRemuneration {
 	private String salaireDeBase;
 	private String salaireBrut;
 	private String totalRetenueSalarial;
+	private String totalTauxSalarial;
 	private String totalCotisationsPatronales;
+	private String totalCotisationsPatronalesImposables;
+	private String totalCotisationsImposables;
 	private String netImposable;
 	private String netAPayer;
-	
-	
+
 	public String getSalaireDeBase() {
 		return salaireDeBase;
 	}
@@ -56,5 +58,29 @@ public class ResultatCalculRemuneration {
 
 	public void setNetAPayer(String netAPayer) {
 		this.netAPayer = netAPayer;
+	}
+
+	public String getTotalCotisationsImposables() {
+		return totalCotisationsImposables;
+	}
+
+	public void setTotalCotisationsImposables(String totalCotisationsImposables) {
+		this.totalCotisationsImposables = totalCotisationsImposables;
+	}
+
+	public String getTotalCotisationsPatronalesImposables() {
+		return totalCotisationsPatronalesImposables;
+	}
+
+	public void setTotalCotisationsPatronalesImposables(String totalCotisationsPatronalesImposables) {
+		this.totalCotisationsPatronalesImposables = totalCotisationsPatronalesImposables;
+	}
+
+	public String getTotalTauxSalarial() {
+		return totalTauxSalarial;
+	}
+
+	public void setTotalTauxSalarial(String totalTauxSalarial) {
+		this.totalTauxSalarial = totalTauxSalarial;
 	}
 }

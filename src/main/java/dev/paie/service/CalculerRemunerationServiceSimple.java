@@ -1,9 +1,8 @@
 package dev.paie.service;
 
 import java.math.BigDecimal;
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -15,6 +14,7 @@ import dev.paie.entite.Grade;
 import dev.paie.entite.ResultatCalculRemuneration;
 import dev.paie.repository.BulletinSalaireRepository;
 import dev.paie.util.PaieUtils;
+import dev.paie.util.ResultatCalculBulletin;
 
 @Component
 public class CalculerRemunerationServiceSimple implements CalculerRemunerationService {
@@ -49,11 +49,28 @@ public class CalculerRemunerationServiceSimple implements CalculerRemunerationSe
 				.reduce(BigDecimal::add).get();
 		String totalRetenueSalarialeFormat = paieUtils.formaterBigDecimal(totalRetenueSalariale);
 
+		// Calcul total taux salarial
+		BigDecimal totalTauxSalarial = listCotisationsNonImposables.stream()
+				.filter(cot -> cot.getTauxSalarial() != null).map(cot -> cot.getTauxSalarial()).reduce(BigDecimal::add)
+				.get();
+		String totalTauxSalarialFormat = paieUtils.formaterBigDecimal(totalTauxSalarial);
+
 		// Calcul total cotisations patronales
 		BigDecimal totalCotisationsPatronales = listCotisationsNonImposables.stream()
 				.filter(cot -> cot.getTauxPatronal() != null).map(cot -> cot.getTauxPatronal().multiply(salaireBrut))
 				.reduce(BigDecimal::add).get();
 		String totalCotisationsPatronalesFormat = paieUtils.formaterBigDecimal(totalCotisationsPatronales);
+
+		// Calcul total cotisations patronales imposables
+		BigDecimal totalCotisationsPatronalesImposables = new BigDecimal("0");
+		for (Cotisation cotisationImposable : listCotisationsImposables) {
+			if (cotisationImposable.getTauxPatronal() != null) {
+				totalCotisationsPatronalesImposables.add(cotisationImposable.getTauxPatronal().multiply(salaireBrut));
+			}
+		}
+
+		String totalCotisationsPatronalesImposablesFormat = paieUtils
+				.formaterBigDecimal(totalCotisationsPatronalesImposables);
 
 		// Calcul net imposable
 		// De préférence passer par un nouvel objet BigDecimal pour un calcul
@@ -65,6 +82,7 @@ public class CalculerRemunerationServiceSimple implements CalculerRemunerationSe
 		BigDecimal totalCotisationsImposables = listCotisationsImposables.stream()
 				.filter(cot -> cot.getTauxSalarial() != null).map(cot -> cot.getTauxSalarial().multiply(salaireBrut))
 				.reduce(BigDecimal::add).get();
+		String totalCotisationsImposablesFormat = paieUtils.formaterBigDecimal(totalCotisationsImposables);
 		BigDecimal netAPayer = netImposable.subtract(totalCotisationsImposables);
 		String netAPayerFormat = paieUtils.formaterBigDecimal(netAPayer);
 
@@ -73,7 +91,10 @@ public class CalculerRemunerationServiceSimple implements CalculerRemunerationSe
 		resultat.setSalaireDeBase(salaireBaseFormat);
 		resultat.setSalaireBrut(salaireBrutFormat);
 		resultat.setTotalRetenueSalarial(totalRetenueSalarialeFormat);
+		resultat.setTotalTauxSalarial(totalTauxSalarialFormat);
 		resultat.setTotalCotisationsPatronales(totalCotisationsPatronalesFormat);
+		resultat.setTotalCotisationsPatronalesImposables(totalCotisationsPatronalesImposablesFormat);
+		resultat.setTotalCotisationsImposables(totalCotisationsImposablesFormat);
 		resultat.setNetImposable(netImposableFormat);
 		resultat.setNetAPayer(netAPayerFormat);
 
@@ -81,27 +102,28 @@ public class CalculerRemunerationServiceSimple implements CalculerRemunerationSe
 	}
 
 	@Transactional
-	public Map<BulletinSalaire, ResultatCalculRemuneration> mapBulletinResultatCalcul() {
+	public List<ResultatCalculBulletin> calculerListeBulletin() {
 
 		List<BulletinSalaire> listeBulletins = bulletinSalaireRepository.findAll();
-		Map<BulletinSalaire, ResultatCalculRemuneration> map = new HashMap<BulletinSalaire, ResultatCalculRemuneration>();
+		List<ResultatCalculBulletin> listeResultat = new ArrayList<>();
 		for (BulletinSalaire bulletin : listeBulletins) {
 			ResultatCalculRemuneration resCalc = this.calculer(bulletin);
-			map.put(bulletin, resCalc);
+
+			ResultatCalculBulletin resBulletin = new ResultatCalculBulletin(bulletin, resCalc);
+
+			listeResultat.add(resBulletin);
 		}
 
-		return map;
+		return listeResultat;
 	}
-	
+
 	@Transactional
-	public Map<BulletinSalaire, ResultatCalculRemuneration> mapBulletinResultatCalcul(int id) {
+	public ResultatCalculBulletin calculerBulletin(int id) {
 
 		BulletinSalaire bulletin = bulletinSalaireRepository.findOne(id);
-		
-		Map<BulletinSalaire, ResultatCalculRemuneration> map = new HashMap<BulletinSalaire, ResultatCalculRemuneration>();
 		ResultatCalculRemuneration resCalc = this.calculer(bulletin);
-		map.put(bulletin, resCalc);
+		ResultatCalculBulletin resBulletin = new ResultatCalculBulletin(bulletin, resCalc);
 
-		return map;
+		return resBulletin;
 	}
 }

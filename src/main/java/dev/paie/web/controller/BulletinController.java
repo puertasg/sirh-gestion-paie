@@ -3,7 +3,6 @@ package dev.paie.web.controller;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
@@ -16,11 +15,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import dev.paie.entite.BulletinSalaire;
-import dev.paie.entite.ResultatCalculRemuneration;
 import dev.paie.repository.BulletinSalaireRepository;
 import dev.paie.repository.PeriodeRepository;
 import dev.paie.repository.RemunerationEmployeRepository;
 import dev.paie.service.CalculerRemunerationService;
+import dev.paie.util.ResultatCalculBulletin;
 
 @Controller
 @RequestMapping(path = "/bulletins")
@@ -61,7 +60,7 @@ public class BulletinController {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("bulletins/bulletins");
 
-		model.addAttribute("mapCalculs", calc.mapBulletinResultatCalcul());
+		model.addAttribute("listBulletinAvecCalcul", calc.calculerListeBulletin());
 
 		return mv;
 	}
@@ -70,7 +69,7 @@ public class BulletinController {
 	@Secured({ "ROLE_UTILISATEUR", "ROLE_ADMINISTRATEUR" })
 	public ModelAndView afficherBulletin(Model model, @PathVariable(value = "id") int id) {
 
-		Map<BulletinSalaire, ResultatCalculRemuneration> bulletinAvecCalcul = calc.mapBulletinResultatCalcul(id);
+		ResultatCalculBulletin bulletinAvecCalcul = calc.calculerBulletin(id);
 
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("bulletins/bulletin");

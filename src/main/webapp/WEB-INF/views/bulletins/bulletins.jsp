@@ -41,18 +41,19 @@
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach var="mapCalculs" items="${mapCalculs}">
+					<c:forEach var="bulletinAvecCalcul"
+						items="${listBulletinAvecCalcul}">
 						<tr>
 							<td><fmt:formatDate
-									value="${mapCalculs.key.dateCreationToDate()}"
+									value="${bulletinAvecCalcul.bulletin.dateCreationToDate()}"
 									pattern="dd/MM/yyyy HH:mm" /></td>
-							<td>${mapCalculs.key.id}</td>
-							<td>${mapCalculs.key.remunerationEmploye.matricule}</td>
-							<td>${mapCalculs.value.salaireBrut}</td>
-							<td>${mapCalculs.value.netImposable}</td>
-							<td>${mapCalculs.value.netAPayer}</td>
+							<td>${bulletinAvecCalcul.bulletin.id}</td>
+							<td>${bulletinAvecCalcul.bulletin.remunerationEmploye.matricule}</td>
+							<td>${bulletinAvecCalcul.resultatCalculRemuneration.salaireBrut}</td>
+							<td>${bulletinAvecCalcul.resultatCalculRemuneration.netImposable}</td>
+							<td>${bulletinAvecCalcul.resultatCalculRemuneration.netAPayer}</td>
 							<td><a
-								href='<c:url value="/mvc/bulletins/${mapCalculs.key.id}"></c:url>'>Visualiser</a></td>
+								href='<c:url value="/mvc/bulletins/${bulletinAvecCalcul.bulletin.id}"></c:url>'>Visualiser</a></td>
 						</tr>
 					</c:forEach>
 				</tbody>
@@ -66,6 +67,7 @@
 		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
 		crossorigin="anonymous"></script>
 
-	<script src="${pageContext.servletContext.contextPath}/resources/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
+	<script
+		src="${pageContext.servletContext.contextPath}/resources/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
